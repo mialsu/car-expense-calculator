@@ -12,7 +12,7 @@ const DataForm = () => {
                 <label>Käyttövoima</label>
                 <select id = 'motor-power'>
                     <option value='gasoline' selected>Bensiini</option>
-                    <option value='diesel'>Diesel</option>>
+                    <option value='diesel'>Diesel</option>
                 </select>
             </div>
             <div className = 'form-control'>
@@ -29,7 +29,7 @@ const DataForm = () => {
             </div>
             <div className = 'form-control'>
                 <label>Vakuutuksen vuosimaksu</label>
-                <input type='number' min='0' placeholder='Syötä ajoneuvovakuutuksen vuosimaksu' />
+                <input type='number' min='0' step='0.01' placeholder='Syötä ajoneuvovakuutuksen vuosimaksu' />
             </div>
             <input type='button' value ='Laske kustannukset' />
         </form>

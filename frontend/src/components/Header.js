@@ -1,9 +1,7 @@
-import React from 'react'
-
 const Header = () => {
     return (
-        <header>
-            <h1>Ajoneuvon kuukausittaisten käyttökustannusten arviointi</h1>
+        <header className='header'>
+            <h1>Ajoneuvon käyttökustannusten arviointi</h1>
         </header>
     )
 }
