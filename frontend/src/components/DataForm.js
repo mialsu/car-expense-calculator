@@ -24,6 +24,11 @@ class DataForm extends React.Component {
         this.setState({
             res: stringifyFormData(data),
         });
+
+        fetch('/api/form-submit-url', {
+            method: 'POST',
+            body: data,
+          });
     }
 
     render() {
@@ -50,7 +55,7 @@ class DataForm extends React.Component {
                     </div>
                     <div className='form-control'>
                         <label>Käyttövoima</label>
-                        <select name='motorpower'>
+                        <select name='motor-power'>
                             <option value='gasoline'>Bensiini</option>
                             <option value='diesel'>Diesel</option>
                         </select>
