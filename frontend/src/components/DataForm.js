@@ -18,27 +18,16 @@ class DataForm extends React.Component {
     }
 
     handleSubmit(event) {
+        const axios = require('axios');
+        const FormData = require('form-data');
+
         event.preventDefault();
         const form = new FormData(event.target);
-        var api_url = 'http://127.0.0.1:8000/api/calculate/'
+        const api_url = 'http://127.0.0.1:8000/api/calculate/'
 
-        const dataToPost= stringifyFormData(form);
-        console.log("Data to post: " + dataToPost)
+        axios.post(api_url, form)
+        .then(response => this.setState({'yearly':response.data.yearly, 'monthly':response.data.monthly}));
 
-        async function fetchCalculation () {
-            const response = await fetch(api_url, { method: 'post', body: dataToPost,
-                headers : { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-                } 
-            })
-            .then((response) => response.json())
-            .then(function(jsonData) {
-                return JSON.stringify(jsonData);
-            })
-            .then(data => this.setState({'yearly': data.yearly, 'monthly': data.monthly}))
-        }
-        fetchCalculation();
     }
 
     render() {

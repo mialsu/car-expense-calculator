@@ -21,6 +21,7 @@ class CalculationResult(APIView):
 
         print("Inside API")
         data = request.data
+        print(data)
 
         vehicle_type = data['vehicle-type']
         year_registered = int(data['year-registered'])
