@@ -1,6 +1,5 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
+import { Container, Button, Form, FormGroup, Card } from 'react-bootstrap'
 import axios from 'axios'
 
 class DataForm extends React.Component {
@@ -27,59 +26,90 @@ class DataForm extends React.Component {
         const maxYear = new Date().getFullYear();
 
         return (
-            <div>
+            <Container fluid='md'>
                 <Form className="submit-form" onSubmit={this.handleSubmit}>
-                    <div className='form-control'>
-                        <label htmlFor='vehicle-type'>Ajoneuvotyyppi: </label>
-                        <select name='vehicle-type'>
+                    <Form.Group className='mb-3'>
+                        <Form.Label>Ajoneuvotyyppi</Form.Label>
+                        <Form.Select name='vehicle-type'>
                             <option value='henkiloauto'>Henkilöauto</option>
                             <option value='pakettiauto'>Pakettiauto</option>
-                        </select>
-                    </div>
-                    <div className='form-control'>
-                        <label>Käyttönottovuosi: </label>
-                        <input type='number' min='1970' max={maxYear} step='1' name='year-registered' required/>
-                    </div>
-                    <div className='form-control'>
-                        <label>Kokonaismassa (kg): </label>
-                        <input type='number' min='0' max='3500' step='1' name='mass' required/>
-                    </div>
-                    <div className='form-control'>
-                        <label>Käyttövoima: </label>
-                        <select name='motor-power'>
+                        </Form.Select>
+                        <Form.Text className="text-muted">
+                            Valitse ajoneuvon tyyppi
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group className='mb-3'>
+                        <Form.Label>Käyttönottovuosi</Form.Label>
+                        <Form.Control type='number' min='1970' max={maxYear} step='1' name='year-registered' required/>
+                        <Form.Text className="text-muted">
+                            Syötä ajoneuvon käyttöönottovuosi
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group className='mb-3'>
+                        <Form.Label>Kokonaismassa</Form.Label>
+                        <Form.Control type='number' min='0' max='3500' step='1' name='mass' required/>
+                        <Form.Text className="text-muted">
+                            Syötä ajoneuvon suurin sallittu kokonaismassa (kg)
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group className='mb-3'>
+                        <Form.Label>Käyttövoima</Form.Label>
+                        <Form.Select name='motor-power'>
                             <option value='gasoline'>Bensiini</option>
                             <option value='diesel'>Diesel</option>
-                        </select>
-                    </div>
-                    <div className='form-control'>
-                        <label>Ajoneuvon CO2 päästöt (g/km): </label>
-                        <input type='number' min='0' step='1' name='emissions' required/>
-                    </div>
-                    <div className='form-control'>
-                        <label>Ajoneuvon keskikulutus (l/100km): </label>
-                        <input type='number' min='0' step='0.1' name='consumption' defaultValue={0}/>
-                    </div>
-                    <div className='form-control'>
-                        <label>Vuosittaiset ajokilometrit (km): </label>
-                        <input type='number' min='0' name='yearly-kilometers' defaultValue={0}/>
-                    </div>
-                    <div className='form-control'>
-                        <label>Polttoaineen litrahinta (€/l): </label>
-                        <input type='number' min='0' step='0.001' name='fuel-price' defaultValue={0}/>
-                    </div>
-                    <div className='form-control'>
-                        <label>Vakuutuksen vuosimaksu: </label>
-                        <input type='number' min='0' step='0.01' name='yearly-insurance' defaultValue={0}/>
-                    </div>
-                    <Button variant = 'primary' type = 'submit'>Laske kustannukset</Button>
+                        </Form.Select>
+                        <Form.Text className="text-muted">
+                            Valitse ajoneuvon käyttövoima
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group className='mb-3'>
+                        <Form.Label>Ajoneuvon CO2 päästöt</Form.Label>
+                        <Form.Control type='number' min='0' step='1' name='emissions' required/>
+                        <Form.Text className="text-muted">
+                            Syötä ajoneuvon CO2-päästöt (g/km)
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group className='mb-3'>
+                        <Form.Label>Ajoneuvon yhdistetty kulutus</Form.Label>
+                        <Form.Control type='number' min='0' step='0.1' name='consumption' defaultValue={0}/>
+                        <Form.Text className="text-muted">
+                            Syötä ajoneuvon yhdistetty kulutus litroina (valinnainen)
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group className='mb-3'>
+                        <Form.Label>Vuosittaiset ajokilometrit</Form.Label>
+                        <Form.Control type='number' min='0' name='yearly-kilometers' defaultValue={0}/>
+                        <Form.Text className="text-muted">
+                            Syötä vuosittaiset ajokilometrit (valinnainen)
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group className='mb-3'>
+                        <Form.Label>Polttoaineen litrahinta</Form.Label>
+                        <Form.Control type='number' min='0' step='0.001' name='fuel-price' defaultValue={0}/>
+                        <Form.Text className="text-muted">
+                            Syötä polttoaineen litrahinta (valinnainen)
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group className='mb-3'>
+                        <Form.Label>Vakuutuksen vuosimaksu: </Form.Label>
+                        <Form.Control type='number' min='0' step='0.01' name='yearly-insurance' defaultValue={0}/>
+                        <Form.Text className="text-muted">
+                            Syötä ajoneuvovakuutuksen vuosimaksu (valinnainen)
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group className='d-grid gap-2'>
+                        <Button variant = 'success' type = 'submit'>Laske kustannukset</Button>
+                    </Form.Group>
                 </Form>
 
-                <div className='results'>
-                    <h3>Tulokset</h3>
-                    <p>Vuodessa: {this.state.yearly} €</p>
-                    <p>Kuukaudessa: {this.state.monthly} €</p>
-                </div>
-            </div>
+                <Card className='mb-3'>
+                    <Card.Body>
+                        <Card.Title>Tulokset</Card.Title>
+                        <Card.Text>Vuodessa: {this.state.yearly} €</Card.Text>
+                        <Card.Text>Kuukaudessa: {this.state.monthly} €</Card.Text>
+                    </Card.Body>
+                </Card>
+            </Container>
         );
     }
 }
