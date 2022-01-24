@@ -1,13 +1,6 @@
 import React from 'react'
-
-function stringifyFormData(fd) {
-    /*Function to convert form data to JSON*/
-    const data = {};
-    for (let key of fd.keys()) {
-        data[key] = fd.get(key);
-    }
-    return JSON.stringify(data, null, 2);
-}
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 
 class DataForm extends React.Component {
 
@@ -36,64 +29,57 @@ class DataForm extends React.Component {
 
         return (
             <div>
-                <form className="submit-form" onSubmit={this.handleSubmit}>
+                <Form className="submit-form" onSubmit={this.handleSubmit}>
                     <div className='form-control'>
-                        <label htmlFor='vehicle-type'>Ajoneuvotyyppi</label>
+                        <label htmlFor='vehicle-type'>Ajoneuvotyyppi: </label>
                         <select name='vehicle-type'>
                             <option value='henkiloauto'>Henkilöauto</option>
                             <option value='pakettiauto'>Pakettiauto</option>
                         </select>
                     </div>
                     <div className='form-control'>
-                        <label>Käyttönottovuosi</label>
-                        <input type='number' min='1970' max={maxYear} step='1' placeholder='' name='year-registered' />
+                        <label>Käyttönottovuosi: </label>
+                        <input type='number' min='1970' max={maxYear} step='1' name='year-registered' required/>
                     </div>
                     <div className='form-control'>
-                        <label>Kokonaismassa</label>
-                        <input type='number' min='0' max='3500' step='1' placeholder='kg' name='mass' />
+                        <label>Kokonaismassa (kg): </label>
+                        <input type='number' min='0' max='3500' step='1' name='mass' required/>
                     </div>
                     <div className='form-control'>
-                        <label>Käyttövoima</label>
+                        <label>Käyttövoima: </label>
                         <select name='motor-power'>
                             <option value='gasoline'>Bensiini</option>
                             <option value='diesel'>Diesel</option>
                         </select>
                     </div>
                     <div className='form-control'>
-                        <label>Ajoneuvon CO2 päästöt</label>
-                        <input type='number' min='0' step='1' placeholder='g/100km' name='emissions' />
+                        <label>Ajoneuvon CO2 päästöt (g/km): </label>
+                        <input type='number' min='0' step='1' name='emissions' required/>
                     </div>
                     <div className='form-control'>
-                        <label>Ajoneuvon keskikulutus</label>
-                        <input type='number' min='0' step='0.1' placeholder='l/100km' name='consumption' />
+                        <label>Ajoneuvon keskikulutus (l/100km): </label>
+                        <input type='number' min='0' step='0.1' name='consumption' defaultValue={0}/>
                     </div>
                     <div className='form-control'>
-                        <label>Vuosittaiset ajokilometrit</label>
-                        <input type='number' min='0' placeholder='km' name='yearly-kilometers' />
+                        <label>Vuosittaiset ajokilometrit (km): </label>
+                        <input type='number' min='0' name='yearly-kilometers' defaultValue={0}/>
                     </div>
                     <div className='form-control'>
-                        <label>Polttoaineen litrahinta</label>
-                        <input type='number' min='0' step='0.001' placeholder='€/l' name='fuel-price' />
+                        <label>Polttoaineen litrahinta (€/l): </label>
+                        <input type='number' min='0' step='0.001' name='fuel-price' defaultValue={0}/>
                     </div>
                     <div className='form-control'>
-                        <label>Vakuutuksen vuosimaksu</label>
-                        <input type='number' min='0' step='0.01' placeholder='€' name='yearly-insurance' />
+                        <label>Vakuutuksen vuosimaksu: </label>
+                        <input type='number' min='0' step='0.01' name='yearly-insurance' defaultValue={0}/>
                     </div>
-                    <button>Laske kustannukset</button>
-                </form>
+                    <Button variant = 'primary' type = 'submit'>Laske kustannukset</Button>
+                </Form>
 
                 <div className='results'>
-                    <h2>Tulokset</h2>
+                    <h3>Tulokset</h3>
                     <p>Vuodessa: {this.state.yearly} €</p>
                     <p>Kuukaudessa: {this.state.monthly} €</p>
                 </div>
-
-                {this.state.res && (
-                    <div className="res-block">
-                        <h3>Data to be sent:</h3>
-                        <pre>FormData {this.state.res}</pre>
-                    </div>
-                )}
             </div>
         );
     }
