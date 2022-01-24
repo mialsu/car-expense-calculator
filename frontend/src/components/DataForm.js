@@ -17,7 +17,8 @@ class DataForm extends React.Component {
         const api_url = 'http://127.0.0.1:8000/api/calculate/'
 
         axios.post(api_url, form)
-        .then(response => this.setState({'yearly':response.data.yearly, 'monthly':response.data.monthly}));
+        .then(response => this.setState({'yearly':response.data.yearly, 'monthly':response.data.monthly}))
+        .catch(err => console.error(err));
 
     }
 
