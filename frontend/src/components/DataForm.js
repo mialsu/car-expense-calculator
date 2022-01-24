@@ -1,7 +1,7 @@
 import React from 'react'
 
 function stringifyFormData(fd) {
-    /*Function to stringify form data*/
+    /*Function to convert form data to JSON*/
     const data = {};
     for (let key of fd.keys()) {
         data[key] = fd.get(key);
@@ -13,22 +13,32 @@ class DataForm extends React.Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {'yearly': 0, 'monthly': 0};
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        const data = new FormData(event.target);
+        const form = new FormData(event.target);
+        var api_url = 'http://127.0.0.1:8000/api/calculate/'
 
-        this.setState({
-            res: stringifyFormData(data),
-        });
+        const dataToPost= stringifyFormData(form);
+        console.log("Data to post: " + dataToPost)
 
-        fetch('/api/form-submit-url', {
-            method: 'POST',
-            body: data,
-          });
+        async function fetchCalculation () {
+            const response = await fetch(api_url, { method: 'post', body: dataToPost,
+                headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+                } 
+            })
+            .then((response) => response.json())
+            .then(function(jsonData) {
+                return JSON.stringify(jsonData);
+            })
+            .then(data => this.setState({'yearly': data.yearly, 'monthly': data.monthly}))
+        }
+        fetchCalculation();
     }
 
     render() {
@@ -73,11 +83,22 @@ class DataForm extends React.Component {
                         <input type='number' min='0' placeholder='km' name='yearly-kilometers' />
                     </div>
                     <div className='form-control'>
+                        <label>Polttoaineen litrahinta</label>
+                        <input type='number' min='0' step='0.001' placeholder='€/l' name='fuel-price' />
+                    </div>
+                    <div className='form-control'>
                         <label>Vakuutuksen vuosimaksu</label>
                         <input type='number' min='0' step='0.01' placeholder='€' name='yearly-insurance' />
                     </div>
                     <button>Laske kustannukset</button>
                 </form>
+
+                <div className='results'>
+                    <h2>Tulokset</h2>
+                    <p>Vuodessa: {this.state.yearly} €</p>
+                    <p>Kuukaudessa: {this.state.monthly} €</p>
+                </div>
+
                 {this.state.res && (
                     <div className="res-block">
                         <h3>Data to be sent:</h3>
