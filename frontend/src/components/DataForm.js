@@ -1,19 +1,17 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import axios from 'axios'
 
 class DataForm extends React.Component {
 
     constructor() {
         super();
-        this.state = {'yearly': 0, 'monthly': 0};
+        this.state = {yearly: 0, monthly: 0};
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleSubmit(event) {
-        const axios = require('axios');
-        const FormData = require('form-data');
-
         event.preventDefault();
         const form = new FormData(event.target);
         const api_url = 'http://127.0.0.1:8000/api/calculate/'
