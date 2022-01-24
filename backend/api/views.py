@@ -19,9 +19,7 @@ class CalculationResult(APIView):
             return int(math.ceil(x / 100.0)) * 100
 
 
-        print("Inside API")
         data = request.data
-        print(data)
 
         vehicle_type = data['vehicle-type']
         year_registered = int(data['year-registered'])
