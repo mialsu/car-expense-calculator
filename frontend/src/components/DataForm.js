@@ -24,7 +24,7 @@ class DataForm extends React.Component {
 
     render() {
 
-        var maxYear = new Date().getFullYear();
+        const maxYear = new Date().getFullYear();
 
         return (
             <div>
