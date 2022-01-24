@@ -26,8 +26,8 @@ class DataForm extends React.Component {
         const maxYear = new Date().getFullYear();
 
         return (
-            <Container fluid='md'>
-                <Form className="submit-form" onSubmit={this.handleSubmit}>
+            <Container fluid="sm" style={{maxWidth: '960px', padding: '10px', margin: 'auto'}}>
+                <Form className="submit-form" onSubmit={this.handleSubmit} style={{padding: '10px'}}>
                     <Form.Group className='mb-3'>
                         <Form.Label>Ajoneuvotyyppi</Form.Label>
                         <Form.Select name='vehicle-type'>
@@ -98,13 +98,12 @@ class DataForm extends React.Component {
                         </Form.Text>
                     </Form.Group>
                     <Form.Group className='d-grid gap-2'>
-                        <Button variant = 'success' type = 'submit'>Laske kustannukset</Button>
+                        <Button variant = 'dark' type = 'submit'>Laske kustannukset</Button>
                     </Form.Group>
                 </Form>
 
-                <Card className='mb-3'>
-                    <Card.Body>
-                        <Card.Title>Tulokset</Card.Title>
+                <Card className='mb-3' style={{padding: '25px', backgroundColor: 'darkseagreen'}}>
+                    <Card.Body style={{margin: 'auto', fontSize: '150%'}}>
                         <Card.Text>Vuodessa: {this.state.yearly} €</Card.Text>
                         <Card.Text>Kuukaudessa: {this.state.monthly} €</Card.Text>
                     </Card.Body>
