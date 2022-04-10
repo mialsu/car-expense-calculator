@@ -24,8 +24,9 @@ class CalculationTest(APITestCase):
             "fuel-price": "2.193",
             "yearly-insurance": "332.68"
             }
+        print("Testing post request.")
         response = self.client.post('/api/calculate/', test_request, format='json')
-        #print("Vastaus on: ")
-        #print(response.content.decode("UTF-8"))
+        print("Response is: ")
+        print(response.content.decode("UTF-8"))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         #self.assertEqual(response.content.decode("UTF-8"), {"yearly": 2880.44, "monthly": 240.04})
