@@ -15,6 +15,7 @@ class CalculationResult(APIView):
 
     def post(self, request, format=None):
 
+        #Simple function to round mass
         def roundMassUp(x):
             return int(math.ceil(x / 100.0)) * 100
 
@@ -30,8 +31,7 @@ class CalculationResult(APIView):
         fuel_price = float(data['fuel-price'])
         yearly_insurance = float(data['yearly-insurance'])
 
-        # TODO: Is there a better solution than nested if-statements?
-
+        # Check request parameters with if statements
         if vehicle_type == 'henkiloauto':
             if mass <= 2500:
                 if year_registered >= 2001:
@@ -141,6 +141,7 @@ class CalculationResult(APIView):
                     yearly_tax = yearly_tax[0]['yearly_tax']
                     yearly_tax = yearly_tax + (roundMassUp(mass)/100)*0.055*365
 
+        # Calculate expenses before returning
         yearly_expenses = yearly_insurance + yearly_tax + \
             (fuel_price * consumption*(yearly_kilometers/100))
         yearly_expenses = round(yearly_expenses, 2)

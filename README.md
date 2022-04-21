@@ -5,7 +5,7 @@ This app uses Finnish car tax categories to calculate running expenses of a vehi
 ## Usage
 
 - Requires React and Python
-- Activate Python virtual environment in project directory.
+- Create and activate Python virtual environment in project directory.
 - pip install -r requirements.txt
 - cd backend
 - python manage.py makemigrations
@@ -18,5 +18,5 @@ This app uses Finnish car tax categories to calculate running expenses of a vehi
     - python manage.py migrate
 - start django server with python manage.py runserver
 - open new terminal window in project directory
-- cd front end -> npm start to start frontend
+- cd frontend -> npm install, then npm start to start frontend
 

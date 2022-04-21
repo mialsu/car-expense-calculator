@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Button, Form, Card } from 'react-bootstrap'
 import axios from 'axios'
 
+// Form/Card component
 class DataForm extends React.Component {
 
     constructor() {
@@ -10,11 +11,13 @@ class DataForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
+    // Function to handle form submitting
     handleSubmit(event) {
         event.preventDefault();
         const form = new FormData(event.target);
         const api_url = 'http://127.0.0.1:8000/api/calculate/'
 
+        // Post request using axios
         axios.post(api_url, form)
         .then(response => this.setState({'yearly':response.data.yearly, 'monthly':response.data.monthly}))
         .catch(err => console.error(err));
@@ -22,7 +25,7 @@ class DataForm extends React.Component {
     }
 
     render() {
-
+        // Set maximum year based on current year
         const maxYear = new Date().getFullYear();
 
         return (

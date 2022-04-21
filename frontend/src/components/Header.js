@@ -1,3 +1,4 @@
+//Simple header component
 const Header = () => {
     return (
         <header className='header' style={{backgroundColor: 'lightgrey', maxWidth: '960px', padding: '10px', margin: 'auto'}}>
